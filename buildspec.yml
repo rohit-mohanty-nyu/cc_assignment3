@@ -14,8 +14,8 @@ phases:
     commands:
       - echo "Zipping deployment package..."
       - zip -r9 ../deployment-package.zip .
-      - zip -g ../deployment-package.zip index-photo.py
-      - zip -g ../deployment-package.zip search-photo.py
+      - zip -g ../deployment-package.zip index_photos.py
+      - zip -g ../deployment-package.zip search_photos.py
       - echo "Listing current directory contents:"
       - ls -la
       - aws s3 sync ./frontend/ "s3://frontendcc3"
@@ -27,7 +27,7 @@ phases:
   post_build:
     commands:
       - echo "Updating index-photo lambda function"
-      - aws lambda update-function-code --function-name index-photos --zip-file fileb://deployment-package.zip
+      - aws lambda update-function-code --function-name index_photos --zip-file fileb://deployment-package.zip
       - echo "Updating search-photo lambda function"
-      - aws lambda update-function-code --function-name search-photo --zip-file fileb://deployment-package.zip
+      - aws lambda update-function-code --function-name search_photos --zip-file fileb://deployment-package.zip
       - echo "post_build step"
